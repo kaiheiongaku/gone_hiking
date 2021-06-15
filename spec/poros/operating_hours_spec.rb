@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe OperatingHours do
   it 'exists and has attributes' do
-    hours_info = File.read('spec/fixtures/hours_spec.json')
-    hours_data = JSON.parse(hours_file, symbolize_names: true)
+    hours_info = File.read('spec/fixtures/poros/hours_spec.json')
+    hours_data = JSON.parse(hours_info, symbolize_names: true)
     hours = OperatingHours.new(hours_data)
 
     expect(hours).to be_an(OperatingHours)
