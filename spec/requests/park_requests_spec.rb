@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'park information requests' do
   describe 'happy path' do
     it 'can pull all parks for a state' do
-      visit '/api/v1/parks?state=wv'
+      get '/api/v1/parks?state=wv'
 
       expect(response).to be_successful
 
