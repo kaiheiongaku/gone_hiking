@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'users requests' do
-  describe 'post request for user do' do
+  describe 'post request for user' do
     describe 'happy path' do
       it 'creates a user' do
         headers = { 'ACCEPT' => 'application/json' }
@@ -56,7 +56,6 @@ describe 'users requests' do
       end
 
       it 'returns an error if there is no password confirmation' do
-        #add password confirmation error to error controller
         headers = { 'ACCEPT' => 'application/json' }
         params = { "user": {
                   "email": "whatever@example.com",
@@ -67,7 +66,7 @@ describe 'users requests' do
         expect(response.status).to eq(400)
 
         errors = JSON.parse(response.body, symbolize_names: true)[:errors]
-        expect(errors).to eq([])
+        expect(errors).to eq('Missing password confirmation.')
       end
 
       it 'ignores extra params' do
