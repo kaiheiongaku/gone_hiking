@@ -3,10 +3,8 @@ class Api::V1::UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save && params[:user][:password_confirmation]
       render json: UsersSerializer.new(@user), status: 201
-    elsif !params[:user][:password_confirmation]
-      render json: { errors: 'Missing password confirmation.'}, status: 400
     else
-      render json: { errors: @user.errors.full_messages }, status: 400
+      user_errors
     end
   end
 

@@ -4,6 +4,14 @@ class ApplicationController < ActionController::API
            status: 404
   end
 
+  def user_errors
+    if !params[:user][:password_confirmation]
+      render json: { errors: 'Missing password confirmation.'}, status: 400
+    else
+      render json: { errors: @user.errors.full_messages }, status: 400
+    end
+  end
+
   def something_went_wrong
     render json: { error: "Something went wrong.  Please try again later."}, status: 404
   end
