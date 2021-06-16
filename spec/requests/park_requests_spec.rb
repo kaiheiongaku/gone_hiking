@@ -44,4 +44,58 @@ describe 'park information requests' do
       expect(all_parks.first[:attributes].keys.count).to eq(9)
     end
   end
+
+  describe 'sad path' do
+    it 'handles different capitalization of state codes', :vcr do
+      get '/api/v1/parks?state=wV'
+
+      expect(response).to be_successful
+
+      wV_json = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(wV_json).to be_an(Array)
+      expect(wV_json.count).to eq(9)
+    end
+
+    it 'returns an error if non-state code is provided', :vcr do
+      get '/api/v1/parks?state=notAstate'
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+
+      error = JSON.parse(response.body, symbolize_names: true)[:error]
+      expect(error).to eq('Cannot read state format.  Please use postal state abbreviations.')
+    end
+
+    it 'returns an error if state does not exist', :vcr do
+      get '/api/v1/parks?state=pl'
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+
+      error = JSON.parse(response.body, symbolize_names: true)[:error]
+      expect(error).to eq('Not a state.  Please choose one of the 50 states.')
+    end
+
+    it 'returns an error if user does not include parks url', :vcr do
+      get '/api/v1/notParks'
+
+      expect(response).to_not be_successful
+      expect(response.status).to eq(404)
+
+      error = JSON.parse(response.body, symbolize_names: true)[:error]
+      expect(error).to eq('No route matches api/v1/notParks. Though you may insist, this route does not exist.')
+    end
+
+    it 'can remove periods from state abbreviations', :vcr do
+      get '/api/v1/parks?state=w.v.'
+
+      expect(response).to be_successful
+
+      period_json = JSON.parse(response.body, symbolize_names: true)[:data]
+
+      expect(period_json).to be_an(Array)
+      expect(period_json.count).to eq(9)
+    end
+  end
 end
