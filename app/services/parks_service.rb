@@ -6,7 +6,6 @@ class ParksService
         request.headers['X-API-KEY'] = ENV['PARKS_API_KEY']
       end
       JSON.parse(response.body, symbolize_names: true)
-      binding.pry
     end
 
     private
