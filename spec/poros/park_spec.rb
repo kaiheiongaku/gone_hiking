@@ -24,5 +24,17 @@ describe Park do
       expect(park.office_address).to be_an(Address)
       expect(park.image).to be_an(Image)
     end
+
+    it 'can create a park with many attributes blank' do
+      odd_park_file = File.read('spec/fixtures/poros/odd_park_spec.json')
+      odd_park_data = JSON.parse(odd_park_file, symbolize_names: true)
+      odd_park = Park.new(odd_park_data)
+
+      expect(odd_park).to be_a(Park)
+      expect(odd_park.weather_info).to eq('')
+      expect(odd_park.image).to eq(nil)
+      expect(odd_park.office_address).to eq(nil)
+      expect(odd_park.hours).to eq(nil)
+    end
   end
 end
