@@ -1,5 +1,6 @@
 class Image
   attr_reader :credit, :title, :action_description, :location_caption, :url
+  
   def initialize(image_info)
     @credit             = image_info[:credit]
     @title              = image_info[:title]
