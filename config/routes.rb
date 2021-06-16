@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :parks, only: :index
+      resources :users, only: :create
     end
   end
   match '*unmatched_route', :to => 'application#raise_not_found!', :via => :all
