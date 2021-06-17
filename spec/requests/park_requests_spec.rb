@@ -43,6 +43,70 @@ describe 'park information requests' do
       expect(all_parks.first[:attributes]).to be_a(Hash)
       expect(all_parks.first[:attributes].keys.count).to eq(9)
     end
+
+    it 'can pull different numbers of parks without state',:vcr do
+      get '/api/v1/parks?limit=200'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.size).to eq(200)
+    end
+
+    it 'can pull different number of parks with state', :vcr do
+      get '/api/v1/parks?state=wv&limit=2'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.size).to eq(2)
+      expect(parks.first[:attributes][:office_address][:state]).to eq('WV')
+    end
+
+    it 'can sort parks by name alphabetically', :vcr do
+      get '/api/v1/parks?alphasort=true'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.first[:attributes][:full_name].first).to eq('A')
+      expect(parks.first[:attributes][:full_name].last).not_to eq('A')
+    end
+
+    it 'can filter parks with free entrance fees', :vcr do
+      get '/api/v1/parks?filterfee=true'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.any? { |park| park[:attributes][:entrance_fee] != '0.00' }).to eq(false)
+    end
+
+    it 'can filter and sort parks', :vcr do
+      get '/api/v1/parks?filterfee=true&alphasort=true'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.any? { |park| park[:attributes][:entrance_fee] != '0.00' }).to eq(false)
+
+      expect(parks.first[:attributes][:full_name].first).to eq('A')
+      expect(parks.first[:attributes][:full_name].last).not_to eq('A')
+    end
+
+    it 'can filter and sort parks with a change of limit', :vcr do
+      get '/api/v1/parks?filterfee=true&alphasort=true&limit=200'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.any? { |park| park[:attributes][:entrance_fee] != '0.00' }).to eq(false)
+
+      expect(parks.first[:attributes][:full_name].first).to eq('A')
+      expect(parks.first[:attributes][:full_name].last).not_to eq('A')
+
+      expect(parks.size).to eq(141)
+    end
   end
 
   describe 'sad path' do

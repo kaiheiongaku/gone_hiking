@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://developer.nps.gov/api/v1/parks?stateCode=notAstate
+    uri: https://developer.nps.gov/api/v1/parks?limit&stateCode=notAstate
     body:
       encoding: US-ASCII
       string: ''
@@ -21,20 +21,17 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 16 Jun 2021 18:46:49 GMT
+      - Thu, 17 Jun 2021 20:22:16 GMT
       Content-Type:
       - application/json; charset=UTF-8
       Content-Length:
-      - '76'
+      - '68'
       Connection:
       - keep-alive
-      Vary:
-      - Accept-Encoding
-      - Accept-Encoding
       X-Ratelimit-Limit:
       - '1000'
       X-Ratelimit-Remaining:
-      - '994'
+      - '957'
       Strict-Transport-Security:
       - max-age=31536000; preload
       - max-age=31536000; preload
@@ -49,13 +46,13 @@ http_interactions:
       Access-Control-Allow-Origin:
       - "*"
       Age:
-      - '0'
+      - '1'
       Via:
       - https/1.1 api-umbrella (ApacheTrafficServer [cMsSf ])
       X-Cache:
       - MISS
     body:
-      encoding: ASCII-8BIT
-      string: "\t\r\n{\r\n\r\n\"total\":\"0\",\r\n\"limit\":\"50\",\r\n\"start\":\"0\",\t\r\n\"data\":[\r\n\r\n]\r\n}\r\n"
-  recorded_at: Wed, 16 Jun 2021 18:46:49 GMT
+      encoding: UTF-8
+      string: "\t\r\n{\r\n\r\n\"total\":\"0\",\r\n\"limit\":\"\",\r\n\"start\":\"0\",\t\r\n\"data\":[\r\n\r\n]\r\n}\r\n"
+  recorded_at: Thu, 17 Jun 2021 20:22:16 GMT
 recorded_with: VCR 6.0.0

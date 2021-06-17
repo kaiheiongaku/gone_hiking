@@ -15,5 +15,13 @@ describe ParksFacade do
       expect(parks).to be_an(Array)
       expect(parks.first).to be_a(Park)
     end
+
+    it 'can return park objects with limit parameters', :vcr do
+      parks = ParksFacade.pull_parks_info(nil, 5)
+
+      expect(parks).to be_an(Array)
+      expect(parks.first).to be_a(Park)
+      expect(parks.size).to eq(5)
+    end
   end
 end

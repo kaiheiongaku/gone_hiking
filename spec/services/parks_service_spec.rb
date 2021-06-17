@@ -25,5 +25,15 @@ describe ParksService do
       expect(parks).to be_a(Hash)
       expect(parks[:data].count).to eq(9)
     end
+
+    it 'can return a specified number of parks', :vcr do
+      endpoint = 'api/v1/parks'
+      params = { limit: 100 }
+
+      parks = ParksService.call_parks_db(endpoint, params)
+
+      expect(parks).to be_a(Hash)
+      expect(parks[:data].count).to eq(100)
+    end
   end
 end
