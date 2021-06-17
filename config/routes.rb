@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :parks, only: :index
       resources :users, only: :create
-      resources :searches, only: :create
+      resources :searches, only: [:create, :show]
     end
   end
   match '*unmatched_route', :to => 'application#raise_not_found!', :via => :all
