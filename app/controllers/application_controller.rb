@@ -12,6 +12,10 @@ class ApplicationController < ActionController::API
     end
   end
 
+  def search_errors
+    render json: { errors: @search.errors.full_messages }, status: 400
+  end
+
   def something_went_wrong
     render json: { error: "Something went wrong.  Please try again later."}, status: 404
   end
