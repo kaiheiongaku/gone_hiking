@@ -53,14 +53,14 @@ describe 'park information requests' do
       expect(parks.size).to eq(200)
     end
 
-    it 'can pull different number of parks with state' do
+    it 'can pull different number of parks with state', :vcr do
       get '/api/v1/parks?state=wv&limit=2'
 
       expect(response).to be_successful
 
       parks = JSON.parse(response.body, symbolize_names: true)[:data]
       expect(parks.size).to eq(2)
-      expect(parks.first.address.state).to eq('WV')
+      expect(parks.first[:attributes][:office_address][:state]).to eq('WV')
     end
 
     it 'can sort parks by name alphabetically' do

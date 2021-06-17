@@ -8,10 +8,10 @@ class Api::V1::ParksController < ApplicationController
   def state_code_present?
     if params[:state]
       params[:state].delete!('.') if params[:state].include?('.')
-      @parks = ParksFacade.pull_parks_info(params[:state])
+      @parks = ParksFacade.pull_parks_info(params[:state], params[:limit])
       true
     else
-      @parks = ParksFacade.pull_parks_info
+      @parks = ParksFacade.pull_parks_info(nil, params[:limit])
       false
     end
   end
