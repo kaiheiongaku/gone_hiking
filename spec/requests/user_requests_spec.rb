@@ -52,7 +52,7 @@ describe 'users requests' do
         expect(response.status).to eq(400)
 
         errors = JSON.parse(response.body, symbolize_names: true)[:errors]
-        expect(errors).to eq(["Password can't be blank", "Password can't be blank"])
+        expect(errors).to eq(["Password can't be blank"])
       end
 
       it 'returns an error if there is no password confirmation' do

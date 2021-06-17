@@ -3,6 +3,8 @@ class User < ApplicationRecord
   validates_presence_of :password, require: true
   validates_uniqueness_of :api_key
 
+  has_many :searches
+
   before_create :set_api_key
 
   def set_api_key
