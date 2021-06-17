@@ -1,13 +1,13 @@
-anguage: ruby
+language: ruby
 rbenv:
-- 1.1.2
+- 2.5.3
 addons:
   postgresql: 9.6
 cache:
 - bundler
 script:
-- rails db:{create,migrate} RAILS_ENV=test
-- rspec
+- bundle exec rails db:{create,migrate} RAILS_ENV=test
+- bundle exec rspec
 deploy:
   provider: heroku
   api_key:
