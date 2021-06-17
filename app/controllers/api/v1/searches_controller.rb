@@ -1,7 +1,7 @@
 class Api::V1::SearchesController <  ApplicationController
 
   def create
-    user = User.find_by(params[:user])
+    user = User.find_by(id: params[:search][:user].to_i)
     @search = Search.new(user: user, text: search_params[:text])
     if @search.save
       render json: SearchesSerializer.new(@search), status: 201
