@@ -7,9 +7,13 @@ describe User do
     it { should validate_presence_of(:password) }
   end
 
+  describe 'relationships' do
+    it { should have_many(:searches) }
+  end
+
   describe 'class methods' do
     it 'generates and saves an api key' do
-      user = User.create(email: 'codingMaster@turing.io', password: 'T1m!s@w3s0me')
+      user = User.create!(email: 'codingMaster@turing.io', password: 'T1m!s@w3s0me')
 
       expect(user.api_key).to be_a(String)
       expect(user.api_key.size).to eq(22)
