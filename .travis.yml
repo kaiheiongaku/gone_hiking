@@ -1,0 +1,18 @@
+language: ruby
+rbenv:
+- 2.5.3
+addons:
+  postgresql: 9.6
+script:
+- RAILS_ENV=test bundle exec rake db:test:prepare --trace
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: 86df72aa-ec93-4f73-bfa9-f97bbc75b3d1
+  app: gone-hiking
+  run: rails db:migrate
+  on:
+    repo: kaiheiongaku/gone_hiking
+    branch: main
+  skip_cleanup: 'true'
