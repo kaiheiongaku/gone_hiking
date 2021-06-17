@@ -4,14 +4,14 @@ describe 'searches requests' do
   describe 'post request for searches' do
     describe 'happy path' do
       before :each do
-        user1 = User.create!(email: 'me@me.com', password: 'pass', password_confirmation: 'pass')
+        @user1 = User.create!(email: 'me@me.com', password: 'pass', password_confirmation: 'pass')
       end
 
       it 'creates a search' do
         headers = { 'ACCEPT' => 'application/json' }
         params = { "search": {
                   "text": "pa",
-                  "user": "user1"
+                  "user": @user1.id
                   }
                 }
         post '/api/v1/searches', params: params, headers: headers
@@ -23,10 +23,12 @@ describe 'searches requests' do
         expect(parsed).to be_a(Hash)
         expect(parsed).to have_key(:data)
         expect(parsed[:data].keys).to eq([:id, :type, :attributes])
-        expect(parsed[:data][:attributes].keys).to eq([:text, :user])
+        expect(parsed[:data][:attributes].keys).to eq([:text, :user_id])
+        expect(parsed[:data][:attributes][:text]).to eq('pa')
+        expect(parsed[:data][:attributes][:user_id]).to eq(@user1.id)
 
         expect(Search.last.text).to eq('pa')
-        expect(Search.last.user).to eq(user1)
+        expect(Search.last.user.id).to eq(@user1.id)
       end
     end
   end
