@@ -6,8 +6,8 @@ addons:
 cache:
 - bundler
 script:
-- bundle exec rails db:{create,migrate} RAILS_ENV=test
-- bundle exec rspec
+- rails db:{create,migrate} RAILS_ENV=test
+- rspec
 deploy:
   provider: heroku
   api_key:
