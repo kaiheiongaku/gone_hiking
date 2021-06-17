@@ -83,7 +83,7 @@ describe 'park information requests' do
     end
 
     it 'can filter and sort parks', :vcr do
-      get '/api/v1/parks?filterfee=true'
+      get '/api/v1/parks?filterfee=true&alphasort=true'
 
       expect(response).to be_successful
 
@@ -92,6 +92,20 @@ describe 'park information requests' do
 
       expect(parks.first[:attributes][:full_name].first).to eq('A')
       expect(parks.first[:attributes][:full_name].last).not_to eq('A')
+    end
+
+    it 'can filter and sort parks with a change of limit', :vcr do
+      get '/api/v1/parks?filterfee=true&alphasort=true&limit=200'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.any? { |park| park[:attributes][:entrance_fee] != '0.00' }).to eq(false)
+
+      expect(parks.first[:attributes][:full_name].first).to eq('A')
+      expect(parks.first[:attributes][:full_name].last).not_to eq('A')
+
+      expect(parks.size).to eq(141)
     end
   end
 
