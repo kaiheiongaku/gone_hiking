@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 describe 'searches requests' do
   describe 'post request for searches' do
     describe 'happy path' do
@@ -8,7 +10,7 @@ describe 'searches requests' do
       it 'creates a search' do
         headers = { 'ACCEPT' => 'application/json' }
         params = { "search": {
-                  "text": "pa"
+                  "text": "pa",
                   "user": "user1"
                   }
                 }
@@ -29,17 +31,17 @@ describe 'searches requests' do
     end
   end
 
-  describe 'get requests for all searches' do
-    describe 'happy path' do
-      it 'can return all searches for all users' do
-        get 'api/v1/searches'
-      end
-
-      it 'can return all searches for a particular user' do
-        get "api/v1/users/#{user1.id}/searches"
-
-      end
-    end
+  # describe 'get requests for all searches' do
+  #   describe 'happy path' do
+  #     it 'can return all searches for all users' do
+  #       get 'api/v1/searches'
+  #     end
+  #
+  #     it 'can return all searches for a particular user' do
+  #       get "api/v1/users/#{user1.id}/searches"
+  #
+  #     end
+  #   end
 
     describe 'sad path' do
       it 'returns an error if the wrong url is used' do
@@ -48,7 +50,7 @@ describe 'searches requests' do
 
       it 'returns an error if the user does not exist' do
 
-      end
+      # end
     end
   end
 end
