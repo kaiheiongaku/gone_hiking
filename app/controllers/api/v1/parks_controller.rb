@@ -1,9 +1,8 @@
 class Api::V1::ParksController < ApplicationController
   before_action :validate_state_code, if: :state_code_present?
+  before_action :check_filters, only: :index
 
   def index
-    @parks.sort_by! { |park| park.full_name } if params[:alphasort]
-    @parks = @parks.find_all { |park| park.entrance_fee == '0.00' } if params[:filterfee]
     render json: ParksSerializer.new(@parks)
   end
 
@@ -19,5 +18,10 @@ class Api::V1::ParksController < ApplicationController
       @parks = ParksFacade.pull_parks_info
       false
     end
+  end
+
+  def check_filters
+    @parks.sort_by! { |park| park.full_name } if params[:alphasort]
+    @parks = @parks.find_all { |park| park.entrance_fee == '0.00' } if params[:filterfee]
   end
 end
