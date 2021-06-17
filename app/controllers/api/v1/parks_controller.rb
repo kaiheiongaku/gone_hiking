@@ -2,7 +2,8 @@ class Api::V1::ParksController < ApplicationController
   before_action :validate_state_code, if: :state_code_present?
 
   def index
-      render json: ParksSerializer.new(@parks)
+    @parks.sort_by {|park| park.full_name } if params[:alphasort]
+    render json: ParksSerializer.new(@parks)
   end
 
   def state_code_present?

@@ -63,8 +63,14 @@ describe 'park information requests' do
       expect(parks.first[:attributes][:office_address][:state]).to eq('WV')
     end
 
-    it 'can sort parks by name alphabetically' do
+    it 'can sort parks by name alphabetically', :vcr do
+      get '/api/v1/parks?alphasort=true'
 
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.first[:attributes][:full_name].first).to eq('A')
+      expect(parks.first[:attributes][:full_name].last).not_to eq('A')
     end
 
     it 'can filter parks with free entrance fees' do
