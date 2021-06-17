@@ -73,8 +73,13 @@ describe 'park information requests' do
       expect(parks.first[:attributes][:full_name].last).not_to eq('A')
     end
 
-    it 'can filter parks with free entrance fees' do
+    it 'can filter parks with free entrance fees', :vcr do
+      get '/api/v1/parks?filterfee=true'
 
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.any? { |park| park[:attributes][:entrance_fee] != '0.00' }).to eq(false)
     end
   end
 
