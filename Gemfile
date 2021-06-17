@@ -46,6 +46,7 @@ group :test do
   gem 'faker'
   gem 'webmock'
   gem 'vcr'
+  gem 'rspec-core'
 end
 
 group :development do
