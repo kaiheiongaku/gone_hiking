@@ -43,6 +43,33 @@ describe 'park information requests' do
       expect(all_parks.first[:attributes]).to be_a(Hash)
       expect(all_parks.first[:attributes].keys.count).to eq(9)
     end
+
+    it 'can pull different numbers of parks without state',:vcr do
+      get '/api/v1/parks?limit=200'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.size).to eq(200)
+    end
+
+    it 'can pull different number of parks with state' do
+      get '/api/v1/parks?state=wv&limit=2'
+
+      expect(response).to be_successful
+
+      parks = JSON.parse(response.body, symbolize_names: true)[:data]
+      expect(parks.size).to eq(2)
+      expect(parks.first.address.state).to eq('WV')
+    end
+
+    it 'can sort parks by name alphabetically' do
+
+    end
+
+    it 'can filter parks with free entrance fees' do
+
+    end
   end
 
   describe 'sad path' do
