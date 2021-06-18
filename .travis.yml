@@ -5,8 +5,8 @@ rvm:
 dist: trusty
 addons:
   postgresql: 9.6
+before_install: gem install bundler:2.2.20
 script:
-- bundle update --bundler
 - bundle exec rake db:create
 - bundle exec rake db:migrate
 - bundle exec rspec
