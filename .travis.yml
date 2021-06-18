@@ -7,7 +7,7 @@ cache:
 - bundler
 script:
 - bundle exec rails db:{create,migrate} RAILS_ENV=test
-- rspec
+- bundle exec rspec RAILS_ENV=test
 deploy:
   provider: heroku
   api_key:
