@@ -1,6 +1,6 @@
 language: ruby
 cache: bundler
-rvm:
+rbenv:
 - 2.5.3
 dist: trusty
 addons:
