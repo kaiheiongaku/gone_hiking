@@ -5,8 +5,9 @@ addons:
   postgresql: 9.6
 cache:
 - bundler
+before_install: gem update bundler
 script:
-- bundle exec rails db:{create,migrate}
+- bundle exec rails db:{create,migrate} RAILS_ENV=test
 - bundle exec rspec
 deploy:
   provider: heroku
