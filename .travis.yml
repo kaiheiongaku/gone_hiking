@@ -1,0 +1,19 @@
+language: ruby
+cache: bundler
+rbenv:
+- 2.5.3
+dist: trusty
+addons:
+  postgresql: 9.6
+before_install: gem install bundler:2.2.20
+script:
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: ZGGukZZY5raHE4s5iTNywLdGiJr6cOn7uE11zQyj/zCMTgl1sC73dp0jgm30w3Oh2qmV0Ilzd4t4u0OJRp0SuT0x0vDe8xLcWZOuzEn4beI9p5oKaXe6PHuZBWK+7X0P28k9cBjqUBkM7V/P0SN4rvdZT9PGGVXC+PvvET/9TBLV2iDP+TaUuM9e0XONq4Vx16M5LeoWmiyLVsMioojnmJbEiKiRSSFpvY5Lo7K7gFvUA3BATVxmIB4ATBTVV2iULQALxkmntDhtQnW9/zCjusc9/QyF74/I5QHjslmtMwURT8NFTBh9wQXL/r2a0WzsQQU7kzcGyLPICDs3sg3pGG//muOpXbMP1pLBoCtIi4ONr/LDQyZzfpZC915G+EORptlBULNgUlfP9aAl9SqB74WXHsKF227/GY134U+Wi4la41YgBswu7qYVnxMO5/tSQJH0LjH7q9tRncCXau7r++D/KewWSIW9LClud+8WheChmpgBHkZA0BU854JYfAajGWM/YZ+Ij5VTd3TBPSBiy2+fs5EbWYrjPOQcd7b5Hfces+8iDGfTAesNBmSJvMQGmHwM2/kDqRcm6/O3M7B9wHNuXDsRHoxC2XbpojWQ2UcEXj5a40IEp+qh+HwC70lgjxpfJHM0/Gn4WEbv0jkQ6/VEJu/1NjhzqZCh8TsgP5s=
+  app: gone-hiking
+  on:
+    repo: kaiheiongaku/gone_hiking
