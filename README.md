@@ -90,33 +90,35 @@ OR
 Pulls the first 50 of all parks from the NPS.
 
 The following query parameters are available:
-* state
+* state \n
 Pulls parks for a particular state with a default limit of 50.
 Example: get '/api/v1/parks?state=wv'
 Note: The API can handle both different capitalizations and periods for the state abbreviations. Both WV and w.v. are valid.
 
-* limit
+* limit \n
 Changes the number of parks returned.
 Example: get '/api/v1/parks?limit=200'
 
-* alphasort
-Example: '/api/v1/parks?alphasort=true'
-Note: Do not use the alphasort parameter if not desired.
+* alphasort \n
+Sorts alphabetically by name.
+Example: '/api/v1/parks?alphasort=true'\n
+Note: Do not use the alphasort parameter if not desired.\n
 Future versions will better handle this parameter.
 
-* filterfee
-Example: '/api/v1/parks?filterfee=true'
-Note: Do not use the filterfee parameter if not desired.
+* filterfee \n
+Returns only parks with free entrance fees.
+Example: '/api/v1/parks?filterfee=true'\n
+Note: Do not use the filterfee parameter if not desired.\n
 Future versions will better handle this parameter.
 
 Combinations are possible. Examples:
 * get '/api/v1/parks?state=wv&limit=2'
 * get '/api/v1/parks?filterfee=true&alphasort=true&limit=200'
 
-Appropriate errors are returned for invalid parameters.
-get '/api/v1/parks?state=notAstate'
-get '/api/v1/parks?state=pl'
-get '/api/v1/notParks'
+Appropriate errors are returned for invalid parameters. For instance: \n
+get '/api/v1/parks?state=notAstate' \n
+get '/api/v1/parks?state=pl' \n
+get '/api/v1/notParks' \n
 
 Attributes returned for each park:
 * nps_id: National Park Service ID
@@ -125,30 +127,30 @@ Attributes returned for each park:
 * phone_number: Office number for the park
 * entrance_fee: The normal entrance fee for the park
 * hours: Park hours
-    description: broad description of hours for the park
-    exceptions (listed as an array of hashes)
-      exceptionHours
-      startDate
-      name
-      endDate
-    monday: hours for each day of the week
-    tuesday
-    wednesday
-    thursday
-    friday
-    saturday
-    sunday
+* description: broad description of hours for the park
+    * exceptions (listed as an array of hashes)
+      * exceptionHours
+      * startDate
+      * name
+      * endDate
+    * monday: hours for each day of the week
+    * tuesday
+    * wednesday
+    * thursday
+    * friday
+    * saturday
+    * sunday
 * office_address: Physical address of the park office (not necessarily in park)
-    zip_code
-    state
-    city
-    street
+    * zip_code
+    * state
+    * city
+    * street
 * image: first image provided by the NPS
-    credit: source of photo
-    title: name of photo
-    action_description: Description of photo
-    location_caption: Additional description of photo
-    url: url where photo can be found
+    * credit: source of photo
+    * title: name of photo
+    * action_description: Description of photo
+    * location_caption: Additional description of photo
+    * url: url where photo can be found
     (Note: The action description and the location caption are often
       interchangeable. NPS does not consistently label the type of writing.)
 * weather_info: General weather information about the park
