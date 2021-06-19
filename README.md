@@ -95,18 +95,14 @@ The following query parameters are available:
 
 
 Pulls parks for a particular state with a default limit of 50.
-
 Example: get '/api/v1/parks?state=wv'
-
 Note: The API can handle both different capitalizations and periods for the
-
 state abbreviations. Both WV and w.v. are valid.
 
 * limit
 
 
 Changes the number of parks returned.
-
 Example: get '/api/v1/parks?limit=200'
 
 * alphasort
@@ -115,9 +111,7 @@ Example: get '/api/v1/parks?limit=200'
 Sorts alphabetically by name.
 
 Example: '/api/v1/parks?alphasort=true'
-
 Note: Do not use the alphasort parameter if not desired.
-
 Future versions will better handle this parameter.
 
 
@@ -125,11 +119,8 @@ Future versions will better handle this parameter.
 
 
 Returns only parks with free entrance fees.
-
 Example: '/api/v1/parks?filterfee=true'
-
 Note: Do not use the filterfee parameter if not desired.
-
 Future versions will better handle this parameter.
 
 Combinations are possible. Examples:
