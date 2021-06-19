@@ -90,37 +90,31 @@ OR
 
 Pulls the first 50 of all parks from the NPS.
 
-The following query parameters are available:
+__The following query parameters are available:__
 * state
 
-
-Pulls parks for a particular state with a default limit of 50.
-Example: get '/api/v1/parks?state=wv'
+Pulls parks for a particular state with a default limit of 50.   
+Example: get '/api/v1/parks?state=wv'  
 Note: The API can handle both different capitalizations and periods for the
 state abbreviations. Both WV and w.v. are valid.
 
 * limit
 
-
-Changes the number of parks returned.
+Changes the number of parks returned.  
 Example: get '/api/v1/parks?limit=200'
 
 * alphasort
 
-
-Sorts alphabetically by name.
-
-Example: '/api/v1/parks?alphasort=true'
-Note: Do not use the alphasort parameter if not desired.
+Sorts alphabetically by name.  
+Example: '/api/v1/parks?alphasort=true'  
+Note: Do not use the alphasort parameter if not desired.  
 Future versions will better handle this parameter.
-
 
 * filterfee
 
-
-Returns only parks with free entrance fees.
-Example: '/api/v1/parks?filterfee=true'
-Note: Do not use the filterfee parameter if not desired.
+Returns only parks with free entrance fees.  
+Example: '/api/v1/parks?filterfee=true'  
+Note: Do not use the filterfee parameter if not desired.  
 Future versions will better handle this parameter.
 
 Combinations are possible. Examples:
@@ -128,9 +122,9 @@ Combinations are possible. Examples:
 * get '/api/v1/parks?filterfee=true&alphasort=true&limit=200'
 
 Appropriate errors are returned for invalid parameters. For instance:
-get '/api/v1/parks?state=notAstate'
-get '/api/v1/parks?state=pl'
-get '/api/v1/notParks'
+* get '/api/v1/parks?state=notAstate'
+* get '/api/v1/parks?state=pl'
+* get '/api/v1/notParks'
 
 Attributes returned for each park:
 * nps_id: National Park Service ID
@@ -329,7 +323,7 @@ processed and that my API key was not being uploaded to Github (as intended).
 I added the NPS API key to Heroku, which immediately fixed the issue.
 
 Third, I reworked a previous project's user creation.  However, I recently
-implemented the Devise gem in another project, and I should have used that.
+implemented the Devise gem in another project, and will use that in future prj.
 
 
 <!-- CONTACT -->
