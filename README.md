@@ -87,38 +87,59 @@ OR
 
 ### PARKS
 * get '/api/v1/parks'
+
 Pulls the first 50 of all parks from the NPS.
 
 The following query parameters are available:
-* state \n
-Pulls parks for a particular state with a default limit of 50.
-Example: get '/api/v1/parks?state=wv'
-Note: The API can handle both different capitalizations and periods for the state abbreviations. Both WV and w.v. are valid.
+* state
 
-* limit \n
+
+Pulls parks for a particular state with a default limit of 50.
+
+Example: get '/api/v1/parks?state=wv'
+
+Note: The API can handle both different capitalizations and periods for the
+
+state abbreviations. Both WV and w.v. are valid.
+
+* limit
+
+
 Changes the number of parks returned.
+
 Example: get '/api/v1/parks?limit=200'
 
-* alphasort \n
+* alphasort
+
+
 Sorts alphabetically by name.
-Example: '/api/v1/parks?alphasort=true'\n
-Note: Do not use the alphasort parameter if not desired.\n
+
+Example: '/api/v1/parks?alphasort=true'
+
+Note: Do not use the alphasort parameter if not desired.
+
 Future versions will better handle this parameter.
 
-* filterfee \n
+
+* filterfee
+
+
 Returns only parks with free entrance fees.
-Example: '/api/v1/parks?filterfee=true'\n
-Note: Do not use the filterfee parameter if not desired.\n
+
+Example: '/api/v1/parks?filterfee=true'
+
+Note: Do not use the filterfee parameter if not desired.
+
 Future versions will better handle this parameter.
 
 Combinations are possible. Examples:
 * get '/api/v1/parks?state=wv&limit=2'
 * get '/api/v1/parks?filterfee=true&alphasort=true&limit=200'
 
-Appropriate errors are returned for invalid parameters. For instance: \n
-get '/api/v1/parks?state=notAstate' \n
-get '/api/v1/parks?state=pl' \n
-get '/api/v1/notParks' \n
+Appropriate errors are returned for invalid parameters. For instance:
+get '/api/v1/parks?state=notAstate'
+get '/api/v1/parks?state=pl'
+get '/api/v1/notParks'
 
 Attributes returned for each park:
 * nps_id: National Park Service ID
