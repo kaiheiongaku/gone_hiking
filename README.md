@@ -323,7 +323,7 @@ processed and that my API key was not being uploaded to Github (as intended).
 I added the NPS API key to Heroku, which immediately fixed the issue.
 
 Third, I reworked a previous project's user creation.  However, I recently
-implemented the Devise gem in another project, and will use that in future prj.
+implemented the Devise gem in another project, and will use that in future projects.
 
 
 <!-- CONTACT -->
@@ -334,4 +334,3 @@ implemented the Devise gem in another project, and will use that in future prj.
 ## Acknowledgements
 * [README template](https://github.com/othneildrew/Best-README-Template)
 * [National Park Service](https://developer.nps.gov)
-* Custom coded for: Kennedy Watson, Silas Rioux, Dinshaw Gobhai, and Collin Smith at Hotel Engine.
